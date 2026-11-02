@@ -1,0 +1,13 @@
+name: cc-spike
+on:
+  pull_request:
+    branches: [main]
+jobs:
+  spike:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "CC-SPIKE WF R5 ${{ github.event.pull_request.head.sha || github.sha }} ${{ github.sha }} ${{ github.event_name }}"
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd
+      - run: bash ci.sh
+      - if: always()
+        run: echo "CC-SPIKE WF-END R5"
